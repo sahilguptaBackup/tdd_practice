@@ -19,13 +19,16 @@ class ProductTest extends TestCase
 
     public function testSelectAll()
     {
-        $sql = new QueryBuilder;
         $this->assertEquals('select * from products', $this->sql->select('products'));
     }
 
     public function testSelectColumns()
     {
-        $sql = new QueryBuilder;
-        $this->assertEquals('select id, name from products', $sql->select('products', ['id', 'name']));
+        $this->assertEquals('select id, name from products', $this->sql->select('products', ['id', 'name']));
+    }
+
+    public function testOrderBy()
+    {
+        $this->assertEquals('select id, name from products order by id desc', $this->sql->select('products', ['id', 'name'], ['id', 'desc']));
     }
 }
