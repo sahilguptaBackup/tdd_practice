@@ -7,18 +7,25 @@ use App\Builder\QueryBuilder;
 
 class ProductTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
+
+    public function setUp(): void {
+        $this->sql = new QueryBuilder;
+    }
+
     public function testExample()
     {
         $this->assertTrue(true);
     }
 
-    public function testSelectAll(){
+    public function testSelectAll()
+    {
         $sql = new QueryBuilder;
-        $this->assertEquals('select * from products', $sql->select('products'));
+        $this->assertEquals('select * from products', $this->sql->select('products'));
+    }
+
+    public function testSelectColumns()
+    {
+        $sql = new QueryBuilder;
+        $this->assertEquals('select id, name from products', $sql->select('products', ['id', 'name']));
     }
 }
