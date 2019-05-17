@@ -17,25 +17,25 @@ class ProductTest extends TestCase
         $this->assertEquals('select * from products', $this->sql->select('products'));
     }
 
-    // public function testSelectColumns()
-    // {
-    //     $this->assertEquals('select id, name from products', $this->sql->select('products', ['id', 'name']));
-    // }
+    public function testSelectColumns()
+    {
+        $this->assertEquals('select id, name from products', $this->sql->select('products', ['id', 'name']));
+    }
 
-    // public function testOrderBy()
-    // {
-    //     $this->assertEquals('select id, name from products order by id desc', $this->sql->select('products', ['id', 'name'], ['id', 'desc']));
-    // }
+    public function testOrderBy()
+    {
+        $this->assertEquals('select id, name from products order by id desc', $this->sql->select('products', ['id', 'name'], ['id', 'desc']));
+    }
 
-    // public function testDoubleOrderBy()
-    // {
-    //     $this->assertEquals('select * from products order by name asc, category asc', $this->sql->select('products', [['name', 'asc'],['category','asc']]));
-    // }
+    public function testDoubleOrderBy()
+    {
+        $this->assertEquals('select * from products order by name asc, category asc', $this->sql->select('products', [['name', 'asc'],['category','asc']]));
+    }
 
-    // public function testSelectOrderBy()
-    // {
-    //     $this->assertEquals('SELECT id, name FROM products ORDER BY id DESC', $this->sql->select('products', ['id', 'name'], ['id', 'DESC']));
-    // }
+    public function testSelectOrderBy()
+    {
+        $this->assertEquals('SELECT id, name FROM products ORDER BY id DESC', $this->sql->select('products', ['id', 'name'], ['id', 'DESC']));
+    }
 
     public function testLimit()
     {
