@@ -12,23 +12,58 @@ class ProductTest extends TestCase
         $this->sql = new QueryBuilder;
     }
 
-    public function testExample()
-    {
-        $this->assertTrue(true);
-    }
-
     public function testSelectAll()
     {
         $this->assertEquals('select * from products', $this->sql->select('products'));
     }
 
-    public function testSelectColumns()
+    // public function testSelectColumns()
+    // {
+    //     $this->assertEquals('select id, name from products', $this->sql->select('products', ['id', 'name']));
+    // }
+
+    // public function testOrderBy()
+    // {
+    //     $this->assertEquals('select id, name from products order by id desc', $this->sql->select('products', ['id', 'name'], ['id', 'desc']));
+    // }
+
+    // public function testDoubleOrderBy()
+    // {
+    //     $this->assertEquals('select * from products order by name asc, category asc', $this->sql->select('products', [['name', 'asc'],['category','asc']]));
+    // }
+
+    // public function testSelectOrderBy()
+    // {
+    //     $this->assertEquals('SELECT id, name FROM products ORDER BY id DESC', $this->sql->select('products', ['id', 'name'], ['id', 'DESC']));
+    // }
+
+    public function testLimit()
     {
-        $this->assertEquals('select id, name from products', $this->sql->select('products', ['id', 'name']));
+        $this->assertEquals('select * from products limit 10', $this->sql->select('products', 10));
     }
 
-    public function testOrderBy()
+    public function testLimitOffset()
     {
-        $this->assertEquals('select id, name from products order by id desc', $this->sql->select('products', ['id', 'name'], ['id', 'desc']));
+        $this->assertEquals('select * from products limit 6 offset 5', $this->sql->select('products', [6, 5]));
+    }
+
+    public function testCount()
+    {
+        $this->assertEquals('select *, count("id") from products', $this->sql->select('products', ['count','id']));
+    }
+    
+    public function testMax()
+    {
+        $this->assertEquals('select max("cost") from products', $this->sql->select('products', ['max','cost']));
+    }
+
+    public function testGroupMax()
+    {
+        $this->assertEquals('select max("cost") from products group by cost', $this->sql->select('products', ['group by','cost']));
+    }
+
+    public function testDistinct()
+    {
+        $this->assertEquals('select DISTINCT "name" from products', $this->sql->select('products', ['DISTINCT','name']));
     }
 }
