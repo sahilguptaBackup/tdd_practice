@@ -66,4 +66,16 @@ class ProductTest extends TestCase
     {
         $this->assertEquals('select DISTINCT "name" from products', $this->sql->select('products', ['DISTINCT','name']));
     }
+
+    public function testDeleteEqual(){
+        $this->assertEquals('DELETE FROM products WHERE name="abc"', $sql->sql->delete('products', ["name", "abc"]));
+    }
+
+    public function testDeletegreater(){
+        $this->assertEquals('DELETE FROM products WHERE cost>500', $this->sql->delete('products', ["cost", ">", 100]));
+    }
+
+    public function testDelete(){
+        $this->assertEquals('DELETE FROM products', $this->sql->delete('products'));
+    }
 }
