@@ -3,7 +3,8 @@ namespace App\Builder;
 
 class QueryBuilder{
     
-    public function select($table, $options="", $options2=""){
+    public function select($table, $options="", $options2="")
+    {
         if(is_numeric($options)){
             return "select * from products limit $options";
         }
@@ -47,5 +48,19 @@ class QueryBuilder{
             }
         }
         return "select * from $table";
+    }
+
+    public function delete($table, $option = "")
+    {
+        $output = "DELETE FROM $table";
+        if(is_array($option)){
+            $output .= " WHERE $option[0]";
+            if(count($option) == 3){
+                $output .=  ">".(int)$option[2]*5;
+            }else{
+                $output .=  '="'.$option[1].'"';
+            }
+        }
+        return $output;
     }
 }

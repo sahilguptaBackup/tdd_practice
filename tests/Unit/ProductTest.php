@@ -68,7 +68,7 @@ class ProductTest extends TestCase
     }
 
     public function testDeleteEqual(){
-        $this->assertEquals('DELETE FROM products WHERE name="abc"', $sql->sql->delete('products', ["name", "abc"]));
+        $this->assertEquals('DELETE FROM products WHERE name="abc"', $this->sql->delete('products', ["name", "abc"]));
     }
 
     public function testDeletegreater(){
