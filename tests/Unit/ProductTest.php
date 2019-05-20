@@ -7,7 +7,6 @@ use App\Builder\QueryBuilder;
 
 class ProductTest extends TestCase
 {
-
     public function setUp(): void {
         $this->sql = new QueryBuilder;
     }
@@ -77,5 +76,17 @@ class ProductTest extends TestCase
 
     public function testDelete(){
         $this->assertEquals('DELETE FROM products', $this->sql->delete('products'));
+    }
+
+    public function testUpdateCost(){
+        $this->assertEquals('UPDATE products SET cost=200 WHERE name = "apple"', $this->sql->update('products', ["cost",200], ["name", "apple"]));
+    }
+
+    public function testUpdateColor(){
+        $this->assertEquals('UPDATE products SET color="black" WHERE color = "red"', $this->sql->update('products', ["color", "black"], ["color", "red"]));
+    }
+
+    public function testUpdateCostDefault(){
+        $this->assertEquals('UPDATE products SET cost=DEFAULT WHERE cost = 100', $this->sql->update('products', ["cost", 'DEFAULT'], ["cost", 100]));
     }
 }
