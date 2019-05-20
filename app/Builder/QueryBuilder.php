@@ -82,4 +82,21 @@ class QueryBuilder{
         }
         return $output;
     }
+
+    public function insert($table, $columns = [], $values=[])
+    {
+       $sql = "INSERT INTO $table(" .implode(', ', $columns). ")"." VALUES";
+       foreach ($values as $key => $value) {
+           $rows[] = "(" .$this->implodeCustom(', ', $value). ")";
+       }
+       return $sql.implode(', ', $rows);
+    }
+    private function implodeCustom($glue, $values)
+    {
+        $data='';
+        foreach ($values as $key => $value) {
+            $data .= (is_string($value) ? '"'.$value.'"':$value).((sizeof($values)-1 != $key)?$glue:'');
+        }
+        return $data??$values;
+    }
 }
