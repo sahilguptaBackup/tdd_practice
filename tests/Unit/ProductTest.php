@@ -93,4 +93,19 @@ class ProductTest extends TestCase
     public function testJoin(){
         $this->assertEquals('select * from products join categories on products.category_id=categories.id', $this->sql->select('products', 'categories', ['id', 'category_id']));
     }
+
+    public function testInsert()
+    {
+        $this->assertEquals('INSERT INTO posts(id, name, comment_count, color) VALUES(1, "apple", 100, "red")', $this->sql->insert('posts', ["id","name","comment_count","color"], [[1, "apple", 100, "red"]]));
+    }
+
+    public function testInsertMultiple()
+    {
+        $this->assertEquals('INSERT INTO posts(id, post_subject, comment_count, color) VALUES(1, "apple", 100, "red"), (2, "orange", 50, "orange")', $this->sql->insert('posts', ["id","post_subject","comment_count","color"], [[1, "apple", 100, "red"],[2, "orange", 50, "orange"]] ));
+    }
+    
+    public function testInsertWithDefaut()
+    {
+        $this->assertEquals('INSERT INTO posts(id, post_subject, comment_count, color) VALUES(1, "apple", 100, "DEFAULT")', $this->sql->insert('posts', ["id","post_subject","comment_count","color"], [[1, "apple", 100, 'DEFAULT']]));
+    }
 }
