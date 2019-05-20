@@ -46,6 +46,8 @@ class QueryBuilder{
                 }
                 return "select $options[0], $options[1] from $table";
             }
+        }elseif($options == 'categories'){
+            return "select * from $table join $options on $table.$options2[1]=$options.$options2[0]";
         }
         return "select * from $table";
     }
