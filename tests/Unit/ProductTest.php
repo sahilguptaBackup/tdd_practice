@@ -89,4 +89,8 @@ class ProductTest extends TestCase
     public function testUpdateCostDefault(){
         $this->assertEquals('UPDATE products SET cost=DEFAULT WHERE cost = 100', $this->sql->update('products', ["cost", 'DEFAULT'], ["cost", 100]));
     }
+
+    public function testJoin(){
+        $this->assertEquals('select * from products join categories on products.category_id=categories.id', $this->sql->select('products', 'categories', ['id', 'category_id']));
+    }
 }
