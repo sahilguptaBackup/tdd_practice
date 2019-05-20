@@ -63,4 +63,21 @@ class QueryBuilder{
         }
         return $output;
     }
+
+    public function update($table, $option1, $option2)
+    {
+        $output = "UPDATE $table SET $option1[0]=";
+        if($option1[0] == 'cost'){
+            $output .= $option1[1];
+        }else{
+            $output .= '"'.$option1[1].'"';
+        }
+        $output .= " WHERE $option2[0] = ";
+        if($option2[0] == 'cost'){
+            $output .= $option2[1];
+        }else{
+            $output .= '"'.$option2[1].'"';
+        }
+        return $output;
+    }
 }
