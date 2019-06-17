@@ -17,4 +17,12 @@ class SessionTwoPracticeTest extends TestCase
     {
         $this->assertInstanceOf(User::class, $this->user);
     }
+
+    public function testEmailvalidation()
+    {
+        $user = factory(User::class)->create(['email'=>'test']);
+        $this->assertArrayHasKey('email', $user);
+    }
 }
+
+
