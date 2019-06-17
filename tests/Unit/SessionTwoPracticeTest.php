@@ -3,16 +3,18 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
+use App\User;
 
 class SessionTwoPracticeTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
+    public function setUp(): void 
+    {
+        parent::setUp();
+        $this->user = factory(User::class)->create();
+    }
+
     public function testUserInstance()
     {
-        $this->assertInstanceOf(User::class, $user);
+        $this->assertInstanceOf(User::class, $this->user);
     }
 }
