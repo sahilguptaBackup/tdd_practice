@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Redis;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,5 +14,10 @@
 */
 
 Route::get('/', function () {
+    $data = [
+        'name' => 'sahil',
+        'comp' => 'ucreate',
+    ];
+    Redis::publish('test-channel', json_encode($data));
     return view('welcome');
 });

@@ -21,6 +21,7 @@ class SessionTwoPracticeTest extends TestCase
     public function testEmailvalidation()
     {
         $user = factory(User::class)->create(['email'=>'test']);
+        dd($user);
         $this->assertArrayHasKey('email', $user);
     }
 }
